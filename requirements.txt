@@ -1,0 +1,16 @@
+anyio==3.4.0
+ariadne==0.14.0
+click==8.0.3
+Flask==2.0.2
+Flask-SQLAlchemy==2.5.1
+graphql-core==3.1.7
+greenlet==1.1.2
+idna==3.3
+itsdangerous==2.0.1
+Jinja2==3.0.3
+MarkupSafe==2.0.1
+sniffio==1.2.0
+SQLAlchemy==1.4.28
+starlette==0.17.1
+typing-extensions==4.0.1
+Werkzeug==2.0.2
