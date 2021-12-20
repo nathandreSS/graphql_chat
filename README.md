@@ -1,10 +1,10 @@
 ﻿# Graphql Chat.
 
 ![Contributors](https://img.shields.io/github/contributors/nathandreSS/graphql_chat?style=plastic)
-![Forks](https://img.shields.io/github/forks/nathandreSS/graphql_chat)
-![Stars](https://img.shields.io/github/stars/nathandreSS/graphql_chat)
-![Licence](https://img.shields.io/github/license/nathandreSS/graphql_chat)
-![Issues](https://img.shields.io/github/issues/nathandreSS/graphql_chat)
+![Forks](https://img.shields.io/github/forks/nathandreSS/graphql_chat?style=plastic)
+![Stars](https://img.shields.io/github/stars/nathandreSS/graphql_chat?style=plastic)
+![Licence](https://img.shields.io/github/license/nathandreSS/graphql_chat?style=plastic)
+![Issues](https://img.shields.io/github/issues/nathandreSS/graphql_chat?style=plastic)
 
 ## This is a real time webchat made in graphql.
 
