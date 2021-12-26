@@ -1,34 +1,66 @@
 from ariadne import ObjectType, convert_kwargs_to_snake_case
+from mongoengine.errors import NotUniqueError, ValidationError
+from secrets import token_urlsafe
+from flask_mail import Mail, Message
 
+from api import app
 from .store import users, messages, groups, queues
-
+from .models import User, to_dict
 mutation = ObjectType("Mutation")
 
+def handle_unique_error_message(keys=[], error=''):
+    for key in keys:
+        if key in error:
+            return  f"{key} already registered!"
 
-@mutation.field("createUser")
+def handle_validation_error_message(keys=[], error=''):
+    for key in keys:
+        if key in error:
+            return  f"{key} is not valid!"
+
+@mutation.field("register")
 @convert_kwargs_to_snake_case
-async def resolve_create_user(obj, info, username):
+async def resolve_create_user(obj, info, email, nickname):
     try:
-        if not users.get(username):
-            user = {
-                "user_id": len(users) + 1,
-                "username": username
-            }
-            users[username] = user
-            return {
-                "success": True,
-                "user": user
-            }
+        User(email=email, nickname=nickname).save()
+        user = to_dict(User.objects.filter(email=email).first())
         return {
-            "success": False,
-            "errors": ["Username is taken"]
+            "success": True,
+            "user": user
         }
-
+    # except NotUniqueError as error:
+    #     return {
+    #         "success": False,
+    #         "errors": [handle_unique_error_message(keys=['nickname', 'email'], error=str(error))]
+    #     }
+    # except ValidationError as error:       
+    #     return {
+    #         "success": False,
+    #         "errors": [handle_validation_error_message(keys=['nickname', 'email'], error=str(error))]
+    #     }
     except Exception as error:
         return {
             "success": False,
             "errors": [str(error)]
         }
+
+
+@mutation.field("sendTokenToEmail")
+@convert_kwargs_to_snake_case
+def resolve_send_token_to_email(obj, info, email):
+    token = token_urlsafe(8)
+
+    msg = Message('Authentication Token', sender = 'nathandreandre@gmail.com', recipients = [email])
+    msg.body = token
+
+    user = User.objects.get(email=email)
+    user.token = token
+
+    Mail(app).send(msg)
+    
+    return {
+        "success": True,
+    }
 
 
 @mutation.field("createMessage")

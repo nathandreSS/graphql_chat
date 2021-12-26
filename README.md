@@ -21,4 +21,5 @@ Welcome to my webchat api, here i put my knowledge in graphql to work.
   3. ```python3 -m venv venv```
   4. ```source venv/bin/activate``` on Debian distros or ```.\venv\Scripts\activate``` on Windows
   5. ```pip install -r requirements.txt```
-  6. ```hipercorn app:graphql_app --reload```
+  6. ```hypercorn app:graphql_app --reload```
+  7. ```FLASK_APP=main FLASK_ENV=development flask run```
