@@ -1,0 +1,26 @@
+import os
+
+class Config(object):
+    FERNET_SECRET_KEY = urlsafe_b64encode(os.environ.get("FERNET_SECRET_KEY", "some_secret_key"))
+    SECRET_KEY = os.environ.get("SECRET_KEY", "some_secret_key")
+
+    if not SECRET_KEY:
+        raise ValueError("No secret key set for Flask application")
+   
+    MAIL_SERVER= 'smtp.gmail.com'
+    MAIL_PORT = 465
+    MAIL_USERNAME = 'some_username@gmail.com'
+    MAIL_PASSWORD = 'mail_password' #For gmail you'll need to create a password for app, follow this tutorial: https://support.google.com/mail/?p=BadCredentials
+    MAIL_USE_TLS = False
+    MAIL_USE_SSL = True
+
+    RABBITMQ_USER = 'webchat'
+    RABBITMQ_PASS = 'webchat'
+    RABBITMQ_HOST = '127.0.0.1'
+    RABBITMQ_PORT = '5672'
+
+    MONGODB_SETTINGS = {
+        'db': 'webchat',
+        'host': 'localhost',
+        'port': 27017
+    }

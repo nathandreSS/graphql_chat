@@ -18,12 +18,12 @@ schema = make_executable_schema(
 graphql_app = GraphQL(schema, debug=True)
    
 
-@app.route("/graphql", methods=["GET"])
+@app.route("/", methods=["GET"])
 def graphql_playground():
     return PLAYGROUND_HTML, 200
 
 
-@app.route("/graphql", methods=["POST"])
+@app.route("/", methods=["POST"])
 def graphql_server():
     data = request.get_json()
 

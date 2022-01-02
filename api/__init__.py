@@ -4,19 +4,7 @@ from flask_mail import Mail
 
 app = Flask(__name__)
 
-# app.config.from_object('api.config')
-app.config['MONGODB_SETTINGS'] = {
-    'db': 'webchat',
-    'host': 'localhost',
-    'port': 27017
-}
-
-app.config['MAIL_SERVER']= 'smtp.gmail.com'
-app.config['MAIL_PORT'] = 465
-app.config['MAIL_USERNAME'] = 'nathandreandre@gmail.com'
-app.config['MAIL_PASSWORD'] = 'uoowmmbzzvjfrxuo'
-app.config['MAIL_USE_TLS'] = False
-app.config['MAIL_USE_SSL'] = True
+app.config.from_object('api.instance.config.Config')
 
 db = MongoEngine()
 db.init_app(app)

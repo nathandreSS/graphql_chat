@@ -7,6 +7,7 @@ schema {
 type User {
     id: String
     nickname: String!
+    password: String!
     email: String!
     lastLogin: String
 }
@@ -59,6 +60,12 @@ type addUsersToGroupResult {
     errors: [String]
 }
 
+type loginResult {
+    jwt_token: String
+    success: Boolean!
+    errors: [String]    
+}
+
 type messagesResult {
     messages: [Message]
     success: Boolean!
@@ -76,9 +83,9 @@ type Query {
 }
 
 type Mutation {
-    register(email: String!, nickname: String!): userResolversResult
-    sendTokenToEmail(email: String!): result
-    login(token: String!): userResolversResult
+    register(email: String!, password: String, nickname: String!): userResolversResult
+    sendTokenToEmail(email: String!, password: String!): result
+    login(email: String!, password: String!, token: String!): loginResult
     
     createGroup(name: String!, usersIds: [String!]!): createGroupResult 
     addUsersToGroup(groupId: String!, usersIds: [String!]!): addUsersToGroupResult
