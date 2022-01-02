@@ -12,4 +12,3 @@ db.init_app(app)
 mail = Mail(app)
 
 
-
