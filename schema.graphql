@@ -13,9 +13,9 @@ type User {
 }
 
 type Group {
-    groupId: String!
+    id: String!
     name: String!
-    usersIds: [String!]!
+    users: [String!]!
     administrator: [String!]!
 }
 
@@ -87,7 +87,7 @@ type Mutation {
     sendTokenToEmail(email: String!, password: String!): result
     login(email: String!, password: String!, token: String!): loginResult
     
-    createGroup(name: String!, usersIds: [String!]!): createGroupResult 
+    createGroup(name: String!, usersId: [String!]!): createGroupResult 
     addUsersToGroup(groupId: String!, usersIds: [String!]!): addUsersToGroupResult
 
     createMessage(senderId: String, recipientId: String, content: String ): createMessageResult

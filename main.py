@@ -6,12 +6,14 @@ from flask import request, jsonify
 from api import app
 from api.queries import query
 from api.mutations import mutation
+from api.users.mutations import auth_mutation
+from api.groups.mutations import groups_mutation
 from api.subscriptions import subscription
 
 
 type_defs = load_schema_from_path("schema.graphql")
 schema = make_executable_schema(
-    type_defs, query, mutation, subscription, snake_case_fallback_resolvers
+    type_defs, query, mutation, auth_mutation, groups_mutation, subscription, snake_case_fallback_resolvers
 )
 
 
